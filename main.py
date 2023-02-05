@@ -1,5 +1,7 @@
-from flask import Flask, render_template,request
+from flask import Flask, render_template,request, jsonify
 import gspread as gp
+import os
+
 
 #connect to google sheet
 gc =  gp.service_account('secrets.json')
@@ -46,4 +48,5 @@ def home_post():
     return render_template("index.html", nomef =nome, telf =tel, emailf =email)
 
 
-app.run(host='0.0.0.0')
+if __name__ == '__main__':
+    app.run(debug=True, port=os.getenv("PORT", default=5000))
